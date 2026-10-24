@@ -1,5 +1,14 @@
 [
-  "call mom",
-  "Buy groceries",
-  "movie"
+  {
+    "Task": "shopping",
+    "Status": "not planned"
+  },
+  {
+    "Task": "movie",
+    "Status": "thursday night"
+  },
+  {
+    "Task": "study",
+    "Status": "In progress"
+  }
 ]
