@@ -22,11 +22,20 @@ def view():
         print(f"\n{j}. {task['Task']} ")
         print(f"Status: {task['Status']}")
 
+def filter_view(status):
+    tasks_1 = []
+    for task in tasks:
+        if task["Status"] == status:
+            tasks_1.append(task)
+    for number, task in enumerate (tasks_1, start=1):
+        print()
+        print(f"{number}. {task['Task']}")
+
 while True:
     action = (input("\nAction : ")).lower().strip()
     if action == "add":
         task = input("\nEnter Task: ")
-        print("\nvalid status names (Case sensetive): Uninitiated, In progress & Completed")
+        print("\nValid status names (Case sensetive): Uninitiated, In progress & Completed")
         status = input("\nEnter status: ")
         tasks.append({"Task":task,"Status":status})
         save()
@@ -38,7 +47,7 @@ while True:
             view()
             change = int(input("\nEnter the item no. to edit: "))
             edit_1 = input("\nEnter new task: ")
-            print("\nvalid status names (Case sensetive): Uninitiated, In progress & Completed.")
+            print("\nValid status names (Case sensetive): Uninitiated, In progress & Completed.")
             edit_2 = input("\nEnter status: ")
             edit = {"Task":edit_1, "Status": edit_2}
             change -= 1
@@ -70,29 +79,12 @@ while True:
             if choice == "1":
                 view()
             elif choice == "2":
-                tasks_1 = []
-                for task in tasks:
-                    if task["Status"] == "In progress":
-                        tasks_1.append(task)
-                for number, task in enumerate (tasks_1, start=1):
-                    print()
-                    print(f"{number}. {task['Task']}")
+                filter_view("In progress")
             elif choice == "3":
-                tasks_1 = []
-                for task in tasks:
-                    if task["Status"] == "Completed":
-                        tasks_1.append(task)
-                for number, task in enumerate (tasks_1, start=1):
-                    print()
-                    print(f"{number}. {task['Task']}")
+                filter_view("Completed")
             elif choice == "4":
                 tasks_1 = []
-                for task in tasks:
-                    if task["Status"] == "Uninitiated":
-                        tasks_1.append(task)
-                for number, task in enumerate (tasks_1, start=1):
-                    print()
-                    print(f"{number}. {task['Task']}")
+                filter_view("Uninitiated")
             else:
                 print("Enter valid no.")
     elif action == "exit" :
