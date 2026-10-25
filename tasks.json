@@ -1,14 +1,22 @@
 [
   {
-    "Task": "shopping",
-    "Status": "not planned"
-  },
-  {
     "Task": "movie",
-    "Status": "thursday night"
+    "Status": "Completed"
   },
   {
-    "Task": "study",
+    "Task": "coding",
     "Status": "In progress"
+  },
+  {
+    "Task": "dishes",
+    "Status": "In progress"
+  },
+  {
+    "Task": "gaming",
+    "Status": "In progress"
+  },
+  {
+    "Task": "cleaning",
+    "Status": "Uninitiated"
   }
 ]
