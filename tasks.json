@@ -1,22 +1,30 @@
 [
   {
     "Task": "movie",
-    "Status": "Completed"
-  },
-  {
-    "Task": "coding",
-    "Status": "In progress"
+    "Status": "completed"
   },
   {
     "Task": "dishes",
-    "Status": "In progress"
+    "Status": "in progress"
   },
   {
-    "Task": "gaming",
-    "Status": "In progress"
+    "Task": "meal",
+    "Status": "completed"
   },
   {
-    "Task": "cleaning",
-    "Status": "Uninitiated"
+    "Task": "coding",
+    "Status": "in progress"
+  },
+  {
+    "Task": "picnic",
+    "Status": "completed"
+  },
+  {
+    "Task": "read a book",
+    "Status": "completed"
+  },
+  {
+    "Task": "learn to speak english",
+    "Status": "in progress"
   }
 ]
