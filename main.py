@@ -6,13 +6,15 @@ try:
 except FileNotFoundError:
     tasks = []
 
+print(len(tasks))
+
 print("\nTASK MANAGER")
 print("\nType 'Add' to add a task.")
 print("Type 'Edit' to edit a task.")
 print("Type 'Delete' to delete a task.")
 print("Type 'View' to view tasks.")
 print("Type 'Exit' to exit.")
-print("To go back at any point Enter '0'.")
+print("Type '0' to go back at any point.")
 
 def save():
     with open("tasks.json", "w") as file:
@@ -34,106 +36,133 @@ def filter_view(status):
 
 def menu():
     while True:
-        action = (input("\nAction: ")).lower().strip()
-        while True:   
-            if action == "add":
-                task = input("\nEnter Task: ")
-                if task == "0":
-                    break
-                else:
-                    while True:
-                        print("\nValid status names: Uninitiated, In progress & Completed")
-                        status = input("\nEnter Status: ").lower().strip()
-                        valid_status = ["uninitiated", "in progress", "completed"]
-                        if status in valid_status:
-                            tasks.append({"Task":task,"Status":status})
-                            save()
-                            print("\nTask added!")
-                            break
-                        elif status == "0":
-                            break
-                        else:
-                            print("\nEnter valid status")
+        action = (input("\nAction: ")).lower().strip()  
+        if action == "add":
+            while True:
+                    task = input("\nEnter Task: ")
+                    if task == "0":
+                        print("\nGoing back...")
+                        break
+                    elif task == "":
+                        print("\nPlease enter a task.")
+                    else:
+                        while True:
+                            print("\nValid status names: Uninitiated, In progress & Completed")
+                            status = input("\nEnter Status: ").lower().strip()
+                            valid_status = ["uninitiated", "in progress", "completed"]
+                            if status in valid_status:
+                                tasks.append({"Task":task,"Status":status})
+                                save()
+                                print("\nTask added!")
+                                break
+                            elif status == "0":
+                                print("\nGoing back...")
+                                break
+                            else:
+                                print("\nEnter valid status")
 
-            elif action == "edit":
+        elif action == "edit":
                 if not tasks :
-                    print("No tasks to edit")
+                    print("\nNo tasks to edit!")
                 else:
+                    view()
                     while True:
                         try:
-                            view()
                             change = int(input("\nEnter the item no. to edit: "))
                             if change == 0:
+                                print("\nGoing back...")
                                 break
                             else:
                                 change -= 1
                                 if change < 0 or change >= len(tasks):
-                                    print("Enter valid value")
+                                    print("\nEnter valid value!")
                                 else:
-                                    task = input("\nEnter new task: ")
                                     while True:
-                                        print("\nValid status names: Uninitiated, In progress & Completed.")
-                                        print("To go back type '0'")
-                                        status = input("\nEnter Status/Leave: ").lower().strip()
-                                        valid_status = ["uninitiated", "in progress", "completed"]
-                                        if status in valid_status:
-                                            if valid_status == status:
-                                                tasks[change] = {"Task":task,"Status":status}
-                                                save()
-                                                print("\nTask edited!\n")
-                                                break
-                                            elif status == "leave":
-                                                break
+                                        task = input("\nEnter new task: ")
+                                        if task == "0":
+                                            print("\nGoing back...")
+                                            break
+                                        elif task == "":
+                                            print("\nPlease enter a task.")
                                         else:
-                                            print("\nEnter valid status")                  
+                                            while True:
+                                                print("\nValid status names: Uninitiated, In progress & Completed.")
+                                                status = input("\nEnter Status: ").lower().strip()
+                                                valid_status = ["uninitiated", "in progress", "completed"]
+                                                if status in valid_status:
+                                                    tasks[change] = {"Task":task,"Status":status}
+                                                    save()
+                                                    print("\nTask edited!")
+                                                    break
+                                                elif status == "0":
+                                                    print("\nGoing back...")
+                                                    break
+                                                else:
+                                                    print("\nEnter valid status")                  
                         except ValueError:
-                            print("\nedEnter valid input!")
+                            print("\nEnter valid input!")
 
-            elif action == "delete" :
+        elif action == "delete" :
                 if not tasks:
-                    print("No tasks to delete")
+                    print("\nNo tasks to delete!")
                 else:
                     view()
-                    try:
-                        delete = int(input("\nEnter item no. to delete: "))
-                        if delete == 0:
-                            break
-                        delete -= 1
-                        tasks.pop(delete)
-                        save()
-                        print("Deletion successfull!")
-                    except ValueError:
-                        print("\n Enter valid input")
+                    while True:
+                        try:
+                            delete = int(input("\nEnter item no. to delete: "))
+                            if delete == 0:
+                                print("\nGoing back...")
+                                break
+                            elif delete < 0 or delete > len(tasks):
+                                print("\nEnter valid value!")
+                            else:
+                                while True:
+                                    confirm = input("\nTo confirm type 'delete' or '0' to cancel: ").lower().strip()
+                                    if confirm == "0":
+                                        print("\nGoing back...")
+                                        break
+                                    elif confirm == "delete":
+                                        delete -= 1
+                                        tasks.pop(delete)
+                                        save()
+                                        print("\nDeletion successfull!")
+                                        break
+                                    else:
+                                        print("\nEnter valid value!")
+                        except ValueError:
+                            print("\nEnter valid input!")
 
-            elif action == "view" :
-
+        elif action == "view" :
                 if not tasks :
-                    print("No tasks yet")
+                    print("\nNo tasks yet!")
                 else:
                     print("\ntype '1' to view All taskes")
                     print("type '2' to view taskes in progress")
                     print("type '3' for finished taskes")
                     print("type '4' for uninitiated tasks")
-                    choice = (input("\nstatus: "))
-                    if choice == "1":
-                        view()
-                    elif choice == "2":
-                        filter_view("in progress")
-                    elif choice == "3":
-                        filter_view("completed")
-                    elif choice == "4":
-                        filter_view("uninitiated")
-                    else:
-                        print("Enter valid no.")
-            elif action == "exit" :
+                    while True: 
+                        choice = (input("\nstatus: "))
+                        if choice == "0":
+                            print("\nGoing back...")
+                            break
+                        elif choice == "1":
+                            view()
+                        elif choice == "2":
+                            filter_view("in progress")
+                        elif choice == "3":
+                            filter_view("completed")
+                        elif choice == "4":
+                            filter_view("uninitiated")
+                        else:
+                            print("\nEnter valid no.")
+        elif action == "exit" :
                 print("\nThank you for using this program.\n")
                 break
 
-            elif action == "0":
-                print("\nYou are in main menu.")
-                break
-            else:
-                print("\nInvalid action")
-                break
-
+        elif action == "0":
+                print("\nYou are already in main menu.")
+                
+        else:
+                print("\nInvalid action!")
+                
 menu()
