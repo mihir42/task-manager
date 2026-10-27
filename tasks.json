@@ -1,18 +1,30 @@
 [
   {
-    "Task": "Brush teeth.",
-    "Status": "completed"
-  },
-  {
     "Task": "homework",
     "Status": "in progress"
   },
   {
-    "Task": "buy clothes",
+    "Task": "get clothes",
+    "Status": "in progress"
+  },
+  {
+    "Task": "add quit function",
+    "Status": "in progress"
+  },
+  {
+    "Task": "study",
+    "Status": "completed"
+  },
+  {
+    "Task": "cleaning ",
+    "Status": "completed"
+  },
+  {
+    "Task": "groceries",
     "Status": "uninitiated"
   },
   {
-    "Task": "plan trip",
-    "Status": "uninitiated"
+    "Task": "read a novel",
+    "Status": "in progress"
   }
 ]

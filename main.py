@@ -34,12 +34,16 @@ def filter_view(status):
         print()
         print(f"{number}. {task['Task']}")
 
+
 def menu():
     while True:
         action = (input("\nAction: ")).lower().strip()  
         if action == "add":
+            quit = 0
             while True:
-                    task = input("\nEnter Task: ")
+                    if quit == 1:
+                        break
+                    task = input("\nEnter Task: ").lower().strip()
                     if task == "0":
                         print("\nGoing back...")
                         break
@@ -54,6 +58,7 @@ def menu():
                                 tasks.append({"Task":task,"Status":status})
                                 save()
                                 print("\nTask added!")
+                                quit += 1
                                 break
                             elif status == "0":
                                 print("\nGoing back...")
@@ -66,7 +71,10 @@ def menu():
                     print("\nNo tasks to edit!")
                 else:
                     view()
+                    quit = 0
                     while True:
+                        if quit == 1:
+                            break
                         try:
                             change = int(input("\nEnter the item no. to edit: "))
                             if change == 0:
@@ -77,7 +85,10 @@ def menu():
                                 if change < 0 or change >= len(tasks):
                                     print("\nEnter valid value!")
                                 else:
+                                    quit = 0
                                     while True:
+                                        if quit == 1:
+                                            break
                                         task = input("\nEnter new task: ")
                                         if task == "0":
                                             print("\nGoing back...")
@@ -93,6 +104,7 @@ def menu():
                                                     tasks[change] = {"Task":task,"Status":status}
                                                     save()
                                                     print("\nTask edited!")
+                                                    quit += 1
                                                     break
                                                 elif status == "0":
                                                     print("\nGoing back...")
@@ -107,7 +119,10 @@ def menu():
                     print("\nNo tasks to delete!")
                 else:
                     view()
+                    quit = 0
                     while True:
+                        if quit == 1:
+                            break
                         try:
                             delete = int(input("\nEnter item no. to delete: "))
                             if delete == 0:
@@ -126,6 +141,7 @@ def menu():
                                         tasks.pop(delete)
                                         save()
                                         print("\nDeletion successfull!")
+                                        quit += 1
                                         break
                                     else:
                                         print("\nEnter valid value!")
@@ -133,6 +149,7 @@ def menu():
                             print("\nEnter valid input!")
 
         elif action == "view" :
+                quit = 0
                 if not tasks :
                     print("\nNo tasks yet!")
                 else:
@@ -140,19 +157,25 @@ def menu():
                     print("type '2' to view taskes in progress")
                     print("type '3' for finished taskes")
                     print("type '4' for uninitiated tasks")
-                    while True: 
+                    while True:
+                        if quit == 1:
+                            break
                         choice = (input("\nstatus: "))
                         if choice == "0":
                             print("\nGoing back...")
                             break
                         elif choice == "1":
                             view()
+                            quit += 1
                         elif choice == "2":
                             filter_view("in progress")
+                            quit += 1
                         elif choice == "3":
                             filter_view("completed")
+                            quit += 1
                         elif choice == "4":
                             filter_view("uninitiated")
+                            quit += 1
                         else:
                             print("\nEnter valid no.")
         elif action == "exit" :
