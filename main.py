@@ -6,8 +6,6 @@ try:
 except FileNotFoundError:
     tasks = []
 
-print(len(tasks))
-
 print("\nTASK MANAGER")
 print("\nType 'Add' to add a task.")
 print("Type 'Edit' to edit a task.")
